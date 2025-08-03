@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome to Skill Lab LMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn ease 1s forwards;
+      }
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      #mute-btn {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        background-color: #fb923c; /* orange-400 */
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(251, 146, 60, 0.4);
+        user-select: none;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+      }
+      #mute-btn:hover {
+        background-color: #f97316; /* orange-500 */
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-300 flex items-center justify-center p-6">
+    <!-- Background music WITHOUT muted -->
+    <audio autoplay loop id="bg-music">
+      <source src="intro.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Mute/Unmute Button -->
+    <button id="mute-btn" aria-label="Toggle sound">🔊 Unmute</button>
+
+    <!-- Orange Frame Wrapper -->
+    <div class="border-4 border-orange-500 rounded-2xl p-8 w-full max-w-3xl shadow-xl bg-white bg-opacity-60 backdrop-blur">
+      <main class="w-full max-w-2xl mx-auto text-center">
+        <!-- Logo -->
+        <div class="flex justify-center mb-6 fade-in" style="animation-delay: 0.2s; animation-duration: 1.2s;">
+          <img src="logo.png" alt="Skill Lab Logo" class="w-56 h-auto" />
+        </div>
+
+        <!-- Heading -->
+        <h1 class="text-4xl font-bold mb-4 text-indigo-800 fade-in" style="animation-delay: 0.6s; animation-duration: 1.2s;">
+          Welcome to Skill Labs Education
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg mb-8 text-gray-700 fade-in" style="animation-delay: 1.4s; animation-duration: 1.2s;">
+          Wings your Skill to find your own path
+        </p>
+
+        <!-- Buttons -->
+        <div class="flex flex-col gap-4 items-center fade-in" style="animation-delay: 2s; animation-duration: 1.2s;">
+          <a href="/lessons" class="w-full max-w-sm bg-white shadow-md rounded-xl p-4 text-indigo-600 hover:bg-indigo-100 transition">
+            ▶️ Watch Lessons Now
+          </a>
+          <a href="/contact" class="w-full max-w-sm bg-white shadow-md rounded-xl p-4 text-green-600 hover:bg-green-100 transition">
+            📞 Contact Us
+          </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-10 text-sm text-gray-600 fade-in" style="animation-delay: 2.8s; animation-duration: 1s;">
+          © <span id="year"></span> Skill Lab. All rights reserved.
+        </footer>
+      </main>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const audio = document.getElementById("bg-music");
+      const muteBtn = document.getElementById("mute-btn");
+
+      muteBtn.addEventListener("click", () => {
+        if (audio.muted) {
+          audio.muted = false;
+          muteBtn.textContent = "🔊 Unmute";
+        } else {
+          audio.muted = true;
+          muteBtn.textContent = "🔇 Mute";
+        }
+      });
+
+      // Optional: start muted, change button text accordingly
+      if (audio.muted) {
+        muteBtn.textContent = "🔇 Mute";
+      } else {
+        muteBtn.textContent = "🔊 Unmute";
+      }
+    </script>
+  </body>
+</html>
